@@ -110,6 +110,7 @@ YOLO v5 expects to find the training labels for the images in the folder whose n
 # Train
 Now all you need to do make sure you activate your venv and  make sure you are in the directory  that in yolov5.
 For example:
+
    <img width="400" src=https://imgyukle.com/f/2022/02/06/o9w2wN.png></a>
 
 Finally, run the training:
