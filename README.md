@@ -54,14 +54,14 @@ You need to copy your annotations path for running python script, or just move p
 İf you move your scripts to in face_mask_data folder just run with:
 
 ```bash
-python3 xml_into_YOLO_txt --path annotations
+python3 xml_into_YOLO_txt.py --path annotations
 ```
 Or you can also copy annotations path and runs with it.For me its home/kadir/githubprojects/Yolo5_Mask_Detection/face_mask_data/annotations 
 
 For example:
 
 ```bash
-python3 xml_into_YOLO_txt --path home/kadir/githubprojects/Yolo5_Mask_Detection/face_mask_data/annotations
+python3 xml_into_YOLO_txt.py --path home/kadir/githubprojects/Yolo5_Mask_Detection/face_mask_data/annotations
 ```
 # Testing the annotations
 Just for a sanity check, let us now test some of these transformed annotations. We randomly load one of the annotations and plot boxes using the transformed annotations, and visually inspect it to see whether our code has worked as intended.
@@ -69,7 +69,7 @@ Just for a sanity check, let us now test some of these transformed annotations. 
 Run with terminal:
 
 ```bash
-python3 testing_annotations -path annotations
+python3 testing_annotations.py --path annotations
 ```
 # Partition the Dataset for train, test, validataion 
 Next we partition the dataset into train, validation, and test sets containing 80%, 10%, and 10% of the data, respectively. You can change the split values according to your convenience.
@@ -81,7 +81,7 @@ We create the folders to keep the splits.
 ```
 Now train_test_split and move it folders:
 ```bash
-python3 move_image_annotations_folders --path annotations
+python3 move_image_annotations_folders.py --path annotations
 ```
 
 Rename the annotations folder to labels, as this is where YOLO v5 expects the annotations to be located in.
