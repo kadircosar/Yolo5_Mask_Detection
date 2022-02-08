@@ -145,7 +145,7 @@ python3 detect.py --source --0 --weights runs/train/face_mask_detection/weights/
 
 There is some of detected test images:
 
-   <img width="400" height="500" src=https://imgyukle.com/f/2022/02/06/o90QDG.png></a>
+   <img  src=https://imgyukle.com/f/2022/02/08/o0LdK0.png></a>
       <img width="400"  src=   https://imgyukle.com/f/2022/02/06/o90GGh.png></a>
 
 And that's it.You can also use diffrent datasets in this project.İf your dataset annotations in yolo format just skip "Convert the Annotations into the YOLO v5 Format" .İf it's not yolo or pascal voc format you can find online conversion tools. 
