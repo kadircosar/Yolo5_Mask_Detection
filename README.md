@@ -76,7 +76,7 @@ python3 testing_annotations.py --path annotations
 # Partition the Dataset for train, test, validataion 
 Next we partition the dataset into train, validation, and test sets containing 80%, 10%, and 10% of the data, respectively. You can change the split values according to your convenience.
 
-Run this code in face_mask_data folder path terminal:
+Run this code in data_mask folder path terminal:
 We create the folders to keep the splits.
 ```bash
 !mkdir images/train images/val images/test annotations/train annotations/val annotations/test
