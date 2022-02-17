@@ -129,14 +129,14 @@ A single image
 A folder of images
 Video
 Webcam
-...and various other formats. We want to run it over our test images so we set the source flag to ../mask_det/images/test/.
+...and various other formats. We want to run it over our test images so we set the source flag to ../data_mask/images/test/.
 
 The weights flag defines the path of the model which we want to run our detector with.
 conf flag is the thresholding objectness confidence.
 name flag defines where the detections are stored. We set this flag to mask_det; therefore, the detections would be stored in runs/detect/mask_det/.
 With all options decided, let us run inference over our test dataset.
 ```bash
-python3 detect.py --source ../mask_data/images/test/ --weights runs/train/mask_det/weights/best.pt --conf 0.25 --name mask_det
+python3 detect.py --source ../data_mask/images/test/ --weights runs/train/mask_det/weights/best.pt --conf 0.25 --name mask_det
 ```
 Also you can run with your webcam realtime and detect masks
 ```bash
