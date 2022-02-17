@@ -109,9 +109,7 @@ names: ['with_mask', 'without_mask', 'mask_weared_incorrect']
 YOLO v5 expects to find the training labels for the images in the folder whose name can be derived by replacing images with labels in the path to dataset images. For example, in the example above, YOLO v5 will look for train labels in
 # Train
 Now all you need to do make sure you activate your venv and  make sure you are in the directory  that in yolov5.
-For example:
 
-   <img width="400" src=https://imgyukle.com/f/2022/02/06/o9w2wN.png></a>
 
 Finally, run the training:
 
@@ -143,10 +141,7 @@ Also you can run with your webcam realtime and detect masks
 python3 detect.py --source --0 --weights runs/train/face_mask_detection/weights/best.pt --conf 0.25 --name face_mask_detection
 ```
 
-There is some of detected test images:
 
-   <img  src=https://imgyukle.com/f/2022/02/08/o0LdK0.png></a>
-      <img width="400"  src=   https://imgyukle.com/f/2022/02/06/o90GGh.png></a>
 
 And that's it.You can also use diffrent datasets in this project.İf your dataset annotations in yolo format just skip "Convert the Annotations into the YOLO v5 Format" .İf it's not yolo or pascal voc format you can find online conversion tools. 
 
