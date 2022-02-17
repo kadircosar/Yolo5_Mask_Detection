@@ -1,4 +1,7 @@
 # Face Mask detection with Yolov5
+   <img width="400" src=images/maksssksksss313.png></a>
+   <img width="400" src=images/maksssksksss442.png></a>
+
 YOLO refers to “You Only Look Once” is one of the most versatile and famous object detection models. For every real-time object detection work, YOLO is the first choice by Data Scientist and Machine learning engineers.
 
 İn this project we will train the YOLO v5 detector on a face mask dataset. 
@@ -27,16 +30,15 @@ With mask;
 Without mask;
 Mask worn incorrectly.
 
-We create a directory called face_mask_dataset to keep our dataset now. This directory needs to be in the same folder as the yolov5 repository folder we just cloned.
-We create a directory called face_mask_dataset to keep our dataset now. This directory needs to be in the same folder as the yolov5 repository folder we just cloned.
+We create a directory called data_mask to keep our dataset now. This directory needs to be in the same folder as the yolov5 repository folder we just cloned.
 ```bash
-mkdir face_mask_dataset
+mkdir data_mask
 ```
 Download the dataset.
 
 https://www.kaggle.com/andrewmvd/face-mask-detection/download
 
-Unzip and move it to face_mask_dataset folder that you created.
+Unzip and move it to data_mask folder that you created.
 
 # Convert the Annotations into the YOLO v5 Format
 In this part, we convert annotations into the format expected by YOLO v5. There are a variety of formats when it comes to annotations for object detection datasets.
@@ -50,18 +52,18 @@ All you need to do make sure you are in the  directory that in the same folder a
 wget https://github.com/kadircosar/Yolo5_Mask_Detection/archive/refs/heads/main.zip
 unzip main.zip
 ```
-You need to copy your annotations path for running python script, or just move python scripts -that you just dowlanded- to in face_mask_data folder.
-İf you move your scripts to in face_mask_data folder just run with:
+You need to copy your annotations path for running python script, or just move python scripts -that you just dowlanded- to in data_mask folder.
+İf you move your scripts to in data_mask folder just run with:
 
 ```bash
 python3 xml_into_YOLO_txt.py --path annotations
 ```
-Or you can also copy annotations path and runs with it.For me its home/kadir/githubprojects/Yolo5_Mask_Detection/face_mask_data/annotations 
+Or you can also copy annotations path and runs with it.For me its home/kadir/githubprojects/Yolo5_Mask_Detection/data_mask/annotations 
 
 For example:
 
 ```bash
-python3 xml_into_YOLO_txt.py --path home/kadir/githubprojects/Yolo5_Mask_Detection/face_mask_data/annotations
+python3 xml_into_YOLO_txt.py --path home/kadir/githubprojects/Yolo5_Mask_Detection/data_mask/annotations
 ```
 # Testing the annotations
 Just for a sanity check, let us now test some of these transformed annotations. We randomly load one of the annotations and plot boxes using the transformed annotations, and visually inspect it to see whether our code has worked as intended.
@@ -96,9 +98,9 @@ nc: Number of classes in the dataset.
 names: Names of the classes in the dataset. The index of the classes in this list would be used as an identifier for the class names in the code.
 Create a new file called face_mask_data.yaml and place it in the yolov5/data folder. Then populate it with the following.
 ```bash
-train: ../face_mask_data/images/train/ 
-val:  ../face_mask_data/images/val/
-test: ../face_mask_data/images/test/
+train: ../data_mask/images/train/ 
+val:  ../data_mask/images/val/
+test: ../data_mask/images/test/
 
 # number of classes
 nc: 3
@@ -114,7 +116,7 @@ Now all you need to do make sure you activate your venv and  make sure you are i
 Finally, run the training:
 
 ```bash
-python3 train.py --img 640 --cfg yolov5s.yaml --hyp hyp.scratch.yaml --batch 32 --epochs 100 --data face_mask_data.yaml --weights yolov5s.pt --workers 24 --name face_mask_detection
+python3 train.py --img 640 --cfg yolov5s.yaml --hyp hyp.scratch.yaml --batch 32 --epochs 100 --data face_mask_data.yaml --weights yolov5s.pt --workers 24 --name mask_det
 ```
 This might take up to 30 minutes to train, depending on your hardware.
 
@@ -127,20 +129,43 @@ A single image
 A folder of images
 Video
 Webcam
-...and various other formats. We want to run it over our test images so we set the source flag to ../face_mask_data/images/test/.
+...and various other formats. We want to run it over our test images so we set the source flag to ../mask_det/images/test/.
 
 The weights flag defines the path of the model which we want to run our detector with.
 conf flag is the thresholding objectness confidence.
-name flag defines where the detections are stored. We set this flag to face_mask_detection; therefore, the detections would be stored in runs/detect/face_mask_detection/.
+name flag defines where the detections are stored. We set this flag to mask_det; therefore, the detections would be stored in runs/detect/mask_det/.
 With all options decided, let us run inference over our test dataset.
 ```bash
-python3 detect.py --source ../face_mask_data/images/test/ --weights runs/train/face_mask_detection/weights/best.pt --conf 0.25 --name face_mask_detection
+python3 detect.py --source ../mask_data/images/test/ --weights runs/train/mask_det/weights/best.pt --conf 0.25 --name mask_det
 ```
 Also you can run with your webcam realtime and detect masks
 ```bash
-python3 detect.py --source --0 --weights runs/train/face_mask_detection/weights/best.pt --conf 0.25 --name face_mask_detection
+python3 detect.py --source --0 --weights runs/train/mask_det/weights/best.pt --conf 0.25 --name mask_det
 ```
 
+# Test
+We can use the  val.py  file to compute score of test set.To perform the evaluation on our test set, we set the task flag to test.The script calculates for us the Average Precision for each class, as well as mean Average Precision.
+
+Run:
+```bash
+python3 val.py --weights runs/train/mask_det/weights/best.pt --data face_mask_data.yaml --task test --name test_yolo
+```
+
+Here is the test's ouput:
+
+   <img  src=images/test.png></a>
+
+Things like plots of various curves (F1, AP, Precision curves etc) can be found in the folder runs/val/test_yolo.Let's see some of these graphs.
+
+Confusion matrix:
+
+<img width="800" src=images/confusion_matrix.png></a>
+
+Precision:
+
+<img width="800" src=images/P_curve.png></a>
+# Weights
+If you want to detect and test whitout training, you can just copy the folder-named runs- in yolov5. Then run codes in terminal.
 
 
 And that's it.You can also use diffrent datasets in this project.İf your dataset annotations in yolo format just skip "Convert the Annotations into the YOLO v5 Format" .İf it's not yolo or pascal voc format you can find online conversion tools. 
